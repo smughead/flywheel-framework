@@ -22,7 +22,7 @@ claude plugin install smughead/flywheel-framework
 ```
 
 This installs the framework as a plugin, giving you access to:
-- **8 core skills** - `/build`, `/test`, `/compound`, `/workflows:plan`, `/workflows:verify`, `/prd-creator`, `/skill-creator`, `/mcp-builder`
+- **9 core skills** - `/build`, `/test`, `/compound`, `/workflows:plan`, `/workflows:verify`, `/prd-creator`, `/skill-creator`, `/mcp-builder`, `/gitignore-setup`
 - **12 patterns** - file structures, workflow patterns, knowledge architecture
 - **7 self-auditing rules** - auto-trigger on knowledge file creation
 
@@ -72,6 +72,26 @@ After every completed unit of work, ask:
 2. Run `/flywheel-setup` in Claude Code
 3. Follow the prompts to configure for your tech stack
 
+## Keep It Personal (One-Time Setup)
+
+Flywheel is designed as a **personal workflow** - your learnings, patterns, and review notes stay on your machine and don't get committed to shared repos.
+
+After installing, run once:
+
+```
+/gitignore-setup
+```
+
+This configures your global gitignore to exclude Flywheel directories from ALL git repos:
+- `.claude/knowledge/`
+- `.claude/rules/`
+- `.claude/agents/`
+- `.claude/skills/`
+- `.claude/plans/`
+- `.claude/reports/`
+
+Your teammates won't see these directories, and you won't accidentally commit personal workflow artifacts.
+
 ## Core Workflow
 
 ```
@@ -90,7 +110,7 @@ After every completed unit of work, ask:
 flywheel-framework/
 ├── .claude-plugin/
 │   └── plugin.json              # Plugin manifest
-├── skills/                      # 8 core skills (stack-agnostic)
+├── skills/                      # 9 core skills (stack-agnostic)
 │   ├── build/                   # Generic build skill
 │   ├── test/                    # Generic test skill
 │   ├── compound/                # Capture learnings
@@ -98,7 +118,8 @@ flywheel-framework/
 │   ├── workflows-verify/        # Verify implementation chain
 │   ├── prd-creator/             # Create PRDs
 │   ├── skill-creator/           # Create new skills
-│   └── mcp-builder/             # Build MCP servers
+│   ├── mcp-builder/             # Build MCP servers
+│   └── gitignore-setup/         # Configure personal workflow
 ├── knowledge/                   # Patterns, learnings, reviews
 │   ├── patterns/                # 12 reusable patterns
 │   ├── learnings/               # (your project learnings)
@@ -125,7 +146,7 @@ flywheel-framework/
 └── Methodology.md               # Core framework documentation
 ```
 
-## Core Skills (8)
+## Core Skills (9)
 
 | Skill | Purpose |
 |-------|---------|
@@ -137,6 +158,7 @@ flywheel-framework/
 | `/prd-creator` | Create product requirement docs |
 | `/skill-creator` | Create new Claude Code skills |
 | `/mcp-builder` | Build MCP servers |
+| `/gitignore-setup` | Configure global gitignore for personal workflow |
 
 ## Tech Stacks
 
