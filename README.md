@@ -15,27 +15,41 @@ Flywheel Framework systematically captures patterns, learnings, and review findi
 
 ## Quick Start
 
-### Option 1: Use the Scaffold Skill (Recommended)
+### Option 1: Install as Claude Code Plugin (Recommended)
 
-1. Copy `scaffold-skill/SKILL.md` to your project's `.claude/skills/` directory
-2. Run `/flywheel-setup` in Claude Code
-3. Follow the prompts to configure for your tech stack
-
-### Option 2: Manual Setup
-
-1. Create the directory structure:
-```
-.claude/
-├── knowledge/
-│   ├── patterns/
-│   ├── learnings/
-│   └── reviews/
-├── rules/
-├── agents/
-└── plans/
+```bash
+claude plugin install smughead/flywheel-framework
 ```
 
-2. Add knowledge base reference to your CLAUDE.md:
+This installs the framework as a plugin, giving you access to:
+- **8 core skills** - `/build`, `/test`, `/compound`, `/workflows:plan`, `/workflows:verify`, `/prd-creator`, `/skill-creator`, `/mcp-builder`
+- **12 patterns** - file structures, workflow patterns, knowledge architecture
+- **7 self-auditing rules** - auto-trigger on knowledge file creation
+
+Then add stack-specific skills/agents from `tech-stacks/` as needed.
+
+### Option 2: Copy the Framework
+
+Copy the entire plugin to your project as `.claude/`:
+
+```bash
+# Clone the repo
+git clone https://github.com/smughead/flywheel-framework.git
+
+# Copy core framework to your project
+cp -R flywheel-framework/skills your-project/.claude/skills
+cp -R flywheel-framework/knowledge your-project/.claude/knowledge
+cp -R flywheel-framework/rules your-project/.claude/rules
+cp -R flywheel-framework/plans your-project/.claude/plans
+cp -R flywheel-framework/reports your-project/.claude/reports
+
+# Copy stack-specific content (e.g., Swift)
+cp -R flywheel-framework/tech-stacks/swift/skills/* your-project/.claude/skills/
+cp -R flywheel-framework/tech-stacks/swift/agents your-project/.claude/agents
+```
+
+Then add this to your CLAUDE.md:
+
 ```markdown
 ## Flywheel Framework
 
@@ -45,9 +59,18 @@ Plan → Work → Verify → Compound
 ### Resources
 - **Knowledge Base:** `.claude/knowledge/`
 - **Review Agents:** `.claude/agents/`
+- **Self-Auditing Rules:** `.claude/rules/`
+
+### Core Question
+After every completed unit of work, ask:
+> "What did we learn that makes the next similar task easier?"
 ```
 
-3. Copy relevant tech reference (e.g., `tech-references/swift-macos-reference.md`) for your stack
+### Option 3: Use the Scaffold Skill (Interactive)
+
+1. Copy `scaffold-skill/SKILL.md` to your project's `.claude/skills/flywheel-setup/` directory
+2. Run `/flywheel-setup` in Claude Code
+3. Follow the prompts to configure for your tech stack
 
 ## Core Workflow
 
@@ -61,28 +84,102 @@ Plan → Work → Verify → Compound
 
 **Key insight:** Human review at the Plan phase prevents exponentially more time fixing code later.
 
-## Directory Contents
+## Directory Structure
 
 ```
 flywheel-framework/
-├── README.md                    # This file
-├── Methodology.md               # Core framework documentation
+├── .claude-plugin/
+│   └── plugin.json              # Plugin manifest
+├── skills/                      # 8 core skills (stack-agnostic)
+│   ├── build/                   # Generic build skill
+│   ├── test/                    # Generic test skill
+│   ├── compound/                # Capture learnings
+│   ├── workflows-plan/          # Plan features with parallel agents
+│   ├── workflows-verify/        # Verify implementation chain
+│   ├── prd-creator/             # Create PRDs
+│   ├── skill-creator/           # Create new skills
+│   └── mcp-builder/             # Build MCP servers
+├── knowledge/                   # Patterns, learnings, reviews
+│   ├── patterns/                # 12 reusable patterns
+│   ├── learnings/               # (your project learnings)
+│   ├── reviews/                 # (your project reviews)
+│   └── TEMPLATES.md             # Templates for all file types
+├── rules/                       # 7 self-auditing rules
+├── plans/                       # (your project plans)
+├── reports/                     # (your review reports)
+├── tech-stacks/                 # Stack-specific content
+│   ├── swift/                   # Swift/macOS/Xcode
+│   │   ├── skills/              # build, test, review-swift, programming-swift
+│   │   ├── agents/              # 5 Swift review agents
+│   │   └── README.md
+│   ├── typescript/              # TypeScript/Node (scaffold)
+│   │   └── README.md
+│   └── python/                  # Python (scaffold)
+│       └── README.md
 ├── tech-references/
 │   ├── stack-template.md        # Template for adding new stacks
 │   └── swift-macos-reference.md # Swift/macOS patterns & agents
-└── scaffold-skill/
-    └── SKILL.md                 # The /flywheel-setup skill
+├── scaffold-skill/
+│   └── SKILL.md                 # The /flywheel-setup skill
+├── README.md                    # This file
+└── Methodology.md               # Core framework documentation
 ```
 
-## Adding a New Tech Stack
+## Core Skills (8)
+
+| Skill | Purpose |
+|-------|---------|
+| `/build` | Build project (auto-detects stack) |
+| `/test` | Run tests (auto-detects stack) |
+| `/compound` | Capture learnings after work |
+| `/workflows:plan` | Plan feature implementation |
+| `/workflows:verify` | Verify implementation meets plan |
+| `/prd-creator` | Create product requirement docs |
+| `/skill-creator` | Create new Claude Code skills |
+| `/mcp-builder` | Build MCP servers |
+
+## Tech Stacks
+
+The framework is stack-agnostic at its core. Stack-specific skills and agents live in `tech-stacks/`:
+
+### Swift/macOS (Complete)
+- 4 skills: build, test, review-swift, programming-swift
+- 5 agents: safety, SwiftUI patterns, macOS compat, test coverage, architecture
+
+### TypeScript (Scaffold)
+- Directory structure ready
+- Contributions welcome!
+
+### Python (Scaffold)
+- Directory structure ready
+- Contributions welcome!
+
+### Adding Your Stack
 
 1. Copy `tech-references/stack-template.md` to `tech-references/[your-stack]-reference.md`
-2. Fill in the bracketed placeholders with your stack-specific:
-   - Build/test commands
-   - 3-6 review agents
-   - Critical patterns
-   - Common pitfalls
-3. Optionally contribute back via PR
+2. Create `tech-stacks/[your-stack]/` with skills and agents
+3. Follow the patterns in `knowledge/patterns/`
+4. Submit a PR!
+
+## Patterns (12)
+
+- File structure patterns (agent, learning, pattern, plan, report, rule, skill)
+- `claude-code-knowledge-architecture.md` - Where to store what
+- `skill-workflow-embedding.md` - Chaining skills together
+- `roadmap-decomposition.md` - Breaking large tasks into phases
+- `terminology-rename-audit.md` - Safe renaming across codebases
+- `framework-extraction.md` - Extracting reusable frameworks
+
+## Rules (7)
+
+Self-auditing rules that trigger when you create/edit knowledge files:
+- `agent-file-audit.md`
+- `learning-file-audit.md`
+- `pattern-file-audit.md`
+- `plan-file-audit.md`
+- `report-file-audit.md`
+- `rule-file-audit.md`
+- `skill-file-audit.md`
 
 ## The Self-Auditing Innovation
 
@@ -107,7 +204,7 @@ The system is working when:
 ## Learn More
 
 - **Full methodology:** [Methodology.md](./Methodology.md)
-- **Swift/macOS setup:** [tech-references/swift-macos-reference.md](./tech-references/swift-macos-reference.md)
+- **Swift/macOS setup:** [tech-stacks/swift/README.md](./tech-stacks/swift/README.md)
 - **Add your stack:** [tech-references/stack-template.md](./tech-references/stack-template.md)
 
 ## License

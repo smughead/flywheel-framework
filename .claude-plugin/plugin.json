@@ -1,0 +1,8 @@
+{
+  "name": "flywheel-framework",
+  "version": "1.0.0",
+  "description": "AI-assisted development methodology where each unit of work makes the next easier. Systematic knowledge capture with self-auditing rules.",
+  "author": { "name": "Brent Ritchie" },
+  "repository": "https://github.com/smughead/flywheel-framework",
+  "license": "MIT"
+}

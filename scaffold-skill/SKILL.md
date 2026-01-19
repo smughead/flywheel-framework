@@ -22,19 +22,57 @@ ls -la .claude/ 2>/dev/null || echo "No .claude directory found"
 **If exists:** Report what's already present, skip creating those directories.
 **If new:** Will create full structure.
 
-### Step 2: Ask Tech Stack
+### Step 2: Ask Setup Method
 
-Use AskUserQuestion to determine the tech stack:
+Use AskUserQuestion to determine setup preference:
 
+```
+question: "How would you like to set up Flywheel Framework?"
+options:
+  - Copy full template (includes 10 skills, 5 agents, 12 patterns, 7 rules)
+  - Minimal setup (directories + starter files only)
+  - Stack-specific (choose your tech stack for targeted agents)
+```
+
+### Step 3: Handle Based on Choice
+
+#### If "Copy full template":
+
+Check if claude-template exists in the flywheel-framework repo:
+
+```bash
+# Try common locations
+ls -la ~/Documents/projects/flywheel-framework/claude-template/ 2>/dev/null || \
+ls -la ../flywheel-framework/claude-template/ 2>/dev/null || \
+echo "Template not found - will use minimal setup"
+```
+
+If found, copy the entire template:
+```bash
+cp -R /path/to/flywheel-framework/claude-template/* .claude/
+```
+
+If not found, fall back to minimal setup with a note about where to get the full template.
+
+#### If "Minimal setup":
+
+Create directory structure and starter files (see Steps 4-7 below).
+
+#### If "Stack-specific":
+
+Ask about tech stack:
 ```
 question: "Which tech stack is this project?"
 options:
   - Swift/macOS (iOS, macOS, Apple platforms)
   - TypeScript/Node (web, APIs, Node.js)
+  - Python (scripts, APIs, ML)
   - Other (I'll configure manually)
 ```
 
-### Step 3: Create Directory Structure
+Then proceed with minimal setup + stack-specific agents.
+
+### Step 4: Create Directory Structure
 
 Create the core directories (skip any that exist):
 
@@ -46,10 +84,12 @@ Create the core directories (skip any that exist):
 │   └── reviews/
 ├── rules/
 ├── agents/
-└── plans/
+├── skills/
+├── plans/
+└── reports/
 ```
 
-### Step 4: Create Starter Rules
+### Step 5: Create Starter Rules
 
 Create self-auditing rules in `.claude/rules/`:
 
@@ -85,7 +125,7 @@ paths:
 - [ ] Uses date prefix naming (YYYY-MM-DD)
 ```
 
-### Step 5: Create Stack-Specific Agents
+### Step 6: Create Stack-Specific Agents
 
 **If Swift/macOS:** Create these agent files in `.claude/agents/`:
 
@@ -95,7 +135,7 @@ paths:
 - `architecture-guardian.md` - Layer boundaries
 - `test-coverage-analyzer.md` - Test quality
 
-Use the prompts from `tech-references/swift-macos-reference.md` in the Flywheel repo.
+Use the agent definitions from `claude-template/agents/` or `tech-references/swift-macos-reference.md`.
 
 **If TypeScript/Node:** Create placeholder agent files:
 
@@ -103,9 +143,15 @@ Use the prompts from `tech-references/swift-macos-reference.md` in the Flywheel 
 - `api-patterns-checker.md`
 - `security-reviewer.md`
 
+**If Python:** Create placeholder agent files:
+
+- `python-safety-reviewer.md`
+- `api-patterns-checker.md`
+- `test-coverage-analyzer.md`
+
 **If Other:** Create template agent file showing the format.
 
-### Step 6: Update CLAUDE.md
+### Step 7: Update CLAUDE.md
 
 Check if CLAUDE.md exists:
 - **If exists:** Append Flywheel section
@@ -132,7 +178,7 @@ After every completed unit of work, ask:
 > "What did we learn that makes the next similar task easier?"
 ```
 
-### Step 7: Create Starter Pattern
+### Step 8: Create Starter Pattern
 
 Create one starter pattern to demonstrate the format:
 
@@ -166,8 +212,37 @@ Every pattern file should have:
 - [ ] Examples use file:line references (not inline code) when > 10 lines
 ```
 
-### Step 8: Report Setup Complete
+### Step 9: Report Setup Complete
 
+**If full template was copied:**
+```
+Flywheel Framework initialized from template!
+
+Copied:
+- .claude/skills/ (10 skills)
+- .claude/agents/ (5 Swift/macOS review agents)
+- .claude/knowledge/ (12 patterns + templates)
+- .claude/rules/ (7 self-auditing rules)
+- .claude/plans/
+- .claude/reports/
+
+Skills available:
+- /build, /test - Build and test workflow
+- /compound - Capture learnings
+- /workflows:plan, /workflows:verify - Feature workflow
+- /review-swift - Run Swift review agents
+- /programming-swift - Swift language reference
+- /prd-creator, /skill-creator, /mcp-builder - Creation tools
+
+Next steps:
+1. Add Flywheel section to your CLAUDE.md (if not already there)
+2. Try the workflow: Plan → Work → Verify → Compound
+3. Document your first learning with /compound
+
+The flywheel is ready to spin!
+```
+
+**If minimal setup:**
 ```
 Flywheel Framework initialized!
 
@@ -176,12 +251,16 @@ Created:
 - .claude/rules/ (self-auditing rules)
 - .claude/agents/ ([count] review agents for [stack])
 - .claude/plans/
+- .claude/reports/
 - Updated CLAUDE.md with Flywheel reference
 
 Next steps:
 1. Document 2-3 existing patterns from your codebase
 2. Create a learning document from recent work
 3. Try the workflow: Plan → Work → Verify → Compound
+
+For the full template with 10 skills and 12 patterns, copy from:
+flywheel-framework/claude-template/
 
 The flywheel is ready to spin!
 ```
@@ -190,4 +269,5 @@ The flywheel is ready to spin!
 
 - This skill is meant to be copied from the flywheel-framework repo into new projects
 - For existing projects with `.claude/` already set up, it will skip creating existing directories
+- The full template includes all skills, agents, patterns, and rules ready to use
 - Stack-specific agents come from the tech-references in the flywheel-framework repo
