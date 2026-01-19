@@ -173,6 +173,11 @@ Plan → Work → Verify → Compound
 - **Review Agents:** `.claude/agents/`
 - **Self-Auditing Rules:** `.claude/rules/`
 
+### Workflow Continuity
+- **SESSION_NOTES.md** — Session state, to-dos, decisions, completed work
+- Start each session by reading SESSION_NOTES.md
+- End each session with `/compound` to update SESSION_NOTES.md
+
 ### Core Question
 After every completed unit of work, ask:
 > "What did we learn that makes the next similar task easier?"
@@ -212,7 +217,54 @@ Every pattern file should have:
 - [ ] Examples use file:line references (not inline code) when > 10 lines
 ```
 
-### Step 9: Report Setup Complete
+### Step 9: Create SESSION_NOTES.md
+
+Create SESSION_NOTES.md in the project root for session continuity:
+
+```markdown
+# [Project Name] Session Notes
+
+**Last Updated:** [today's date]
+
+---
+
+## Current Focus
+[Describe initial project focus or leave as placeholder]
+
+**Plan:** None active
+
+## To-Do
+- [ ] Set up initial project structure
+- [ ] Define core architecture
+- [ ] Create first feature
+
+## Decisions Made
+| Question | Decision | Rationale |
+|----------|----------|-----------|
+| *No decisions yet* | — | — |
+
+## Quick Links
+- [Architecture](CLAUDE.md#architecture) — Core architecture docs
+- [Knowledge Base](.claude/knowledge/) — Learnings and patterns
+- [Active Plans](.claude/plans/) — Implementation plans
+
+## Completed This Session
+*None yet — run `/compound` after completing work to update this section.*
+
+---
+
+## How to Use This File
+
+**Start of session:** Read this file, pick a to-do, start working.
+
+**After /clear or new session:** Check `.claude/plans/` for active plans.
+
+**End of session:** Run `/compound` to update this file automatically.
+```
+
+Replace `[Project Name]` with the actual project name if detectable from directory name or CLAUDE.md.
+
+### Step 10: Report Setup Complete
 
 **If full template was copied:**
 ```
@@ -225,6 +277,7 @@ Copied:
 - .claude/rules/ (7 self-auditing rules)
 - .claude/plans/
 - .claude/reports/
+- SESSION_NOTES.md (session continuity)
 
 Skills available:
 - /build, /test - Build and test workflow
@@ -235,9 +288,9 @@ Skills available:
 - /prd-creator, /skill-creator, /mcp-builder - Creation tools
 
 Next steps:
-1. Add Flywheel section to your CLAUDE.md (if not already there)
-2. Try the workflow: Plan → Work → Verify → Compound
-3. Document your first learning with /compound
+1. Read SESSION_NOTES.md and update the to-dos for your project
+2. Add Flywheel section to your CLAUDE.md (if not already there)
+3. Try the workflow: Plan → Work → Verify → Compound
 
 The flywheel is ready to spin!
 ```
@@ -252,11 +305,12 @@ Created:
 - .claude/agents/ ([count] review agents for [stack])
 - .claude/plans/
 - .claude/reports/
+- SESSION_NOTES.md (session continuity)
 - Updated CLAUDE.md with Flywheel reference
 
 Next steps:
-1. Document 2-3 existing patterns from your codebase
-2. Create a learning document from recent work
+1. Read SESSION_NOTES.md and update the to-dos for your project
+2. Document 2-3 existing patterns from your codebase
 3. Try the workflow: Plan → Work → Verify → Compound
 
 For the full template with 10 skills and 12 patterns, copy from:

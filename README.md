@@ -104,9 +104,33 @@ Your teammates won't see these directories, and you won't accidentally commit pe
 
 **Key insight:** Human review at the Plan phase prevents exponentially more time fixing code later.
 
+### Session Continuity
+
+SESSION_NOTES.md provides context preservation across `/clear` and new sessions.
+
+**How it works:**
+1. `/flywheel-setup` creates SESSION_NOTES.md in project root
+2. Start each session by reading SESSION_NOTES.md, pick a to-do
+3. Work on the task
+4. `/compound` updates SESSION_NOTES after work (marks to-dos complete, links to learnings)
+5. Repeat
+
+**What SESSION_NOTES tracks:**
+- **Current Focus** — What you're working on right now
+- **To-Do** — Actionable items for the session
+- **Decisions Made** — Architectural choices with rationale
+- **Completed This Session** — Links to learnings created
+
+See [session-continuity.md](knowledge/patterns/session-continuity.md) for the full pattern documentation.
+
 ## Directory Structure
 
 ```
+your-project/                    # After /flywheel-setup
+├── SESSION_NOTES.md             # Session continuity (created by scaffold)
+├── CLAUDE.md                    # Project instructions
+└── .claude/                     # Flywheel knowledge infrastructure
+
 flywheel-framework/
 ├── .claude-plugin/
 │   └── plugin.json              # Plugin manifest

@@ -154,3 +154,48 @@ Use these templates when adding new knowledge.
 1. Recommendation 1
 2. Recommendation 2
 ```
+
+---
+
+## SESSION_NOTES Template
+
+```markdown
+# [Project Name] Session Notes
+
+**Last Updated:** YYYY-MM-DD
+
+---
+
+## Current Focus
+[One sentence describing current work]
+
+**Plan:** [Link to active plan if any](.claude/plans/feature-name.md)
+
+## To-Do
+- [ ] Task 1
+- [ ] Task 2
+- [ ] Task 3
+
+## Decisions Made
+| Question | Decision | Rationale |
+|----------|----------|-----------|
+| Example question | Choice made | Why this choice |
+
+## Quick Links
+- [Architecture](CLAUDE.md#architecture) — Core architecture docs
+- [Knowledge Base](.claude/knowledge/) — Learnings and patterns
+- [Active Plans](.claude/plans/) — Implementation plans
+
+## Completed This Session
+- [x] **Feature name** — see [learning](.claude/knowledge/learnings/YYYY-MM-DD-feature-name.md)
+
+---
+
+## How to Use This File
+
+**Start of session:** Read this file, pick a to-do, start working.
+
+**After /clear or new session:** Check `.claude/plans/` for active plans.
+
+**End of session:** Run `/compound` to update this file automatically.
+```
