@@ -1,0 +1,20 @@
+{
+  "name": "flywheel-framework",
+  "owner": {
+    "name": "Brent Ritchie"
+  },
+  "plugins": [
+    {
+      "name": "flywheel-framework",
+      "source": ".",
+      "description": "AI-assisted development methodology where each unit of work makes the next easier. Systematic knowledge capture with self-auditing rules.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Brent Ritchie"
+      },
+      "repository": "https://github.com/smughead/flywheel-framework",
+      "license": "MIT",
+      "keywords": ["workflow", "methodology", "knowledge-capture", "skills", "self-auditing"]
+    }
+  ]
+}
