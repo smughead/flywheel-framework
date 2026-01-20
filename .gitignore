@@ -1,0 +1,8 @@
+# Local Claude settings (developer-only)
+.claude/
+
+# Git internals (shouldn't be in plugin distribution)
+.git/
+
+# macOS
+.DS_Store
