@@ -22,7 +22,7 @@ claude plugin install smughead/flywheel-framework
 ```
 
 This installs the framework as a plugin, giving you access to:
-- **9 core skills** - `/build`, `/test`, `/compound`, `/workflows:plan`, `/workflows:verify`, `/prd-creator`, `/skill-creator`, `/mcp-builder`, `/gitignore-setup`
+- **7 core skills** - `/build`, `/test`, `/compound`, `/workflows:plan`, `/workflows:verify`, `/prd-creator`, `/gitignore-setup`
 - **12 patterns** - file structures, workflow patterns, knowledge architecture
 - **7 self-auditing rules** - auto-trigger on knowledge file creation
 
@@ -134,15 +134,13 @@ your-project/                    # After /flywheel-setup
 flywheel-framework/
 ├── .claude-plugin/
 │   └── plugin.json              # Plugin manifest
-├── skills/                      # 9 core skills (stack-agnostic)
+├── skills/                      # 7 core skills (stack-agnostic)
 │   ├── build/                   # Generic build skill
 │   ├── test/                    # Generic test skill
 │   ├── compound/                # Capture learnings
 │   ├── workflows-plan/          # Plan features with parallel agents
 │   ├── workflows-verify/        # Verify implementation chain
 │   ├── prd-creator/             # Create PRDs
-│   ├── skill-creator/           # Create new skills
-│   ├── mcp-builder/             # Build MCP servers
 │   └── gitignore-setup/         # Configure personal workflow
 ├── knowledge/                   # Patterns, learnings, reviews
 │   ├── patterns/                # 12 reusable patterns
@@ -170,7 +168,7 @@ flywheel-framework/
 └── Methodology.md               # Core framework documentation
 ```
 
-## Core Skills (9)
+## Core Skills (7)
 
 | Skill | Purpose |
 |-------|---------|
@@ -180,8 +178,6 @@ flywheel-framework/
 | `/workflows:plan` | Plan feature implementation |
 | `/workflows:verify` | Verify implementation meets plan |
 | `/prd-creator` | Create product requirement docs |
-| `/skill-creator` | Create new Claude Code skills |
-| `/mcp-builder` | Build MCP servers |
 | `/gitignore-setup` | Configure global gitignore for personal workflow |
 
 ## Tech Stacks

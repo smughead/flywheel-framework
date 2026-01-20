@@ -285,7 +285,7 @@ Skills available:
 - /workflows:plan, /workflows:verify - Feature workflow
 - /review-swift - Run Swift review agents
 - /programming-swift - Swift language reference
-- /prd-creator, /skill-creator, /mcp-builder - Creation tools
+- /prd-creator - PRD creation tool
 
 Next steps:
 1. Read SESSION_NOTES.md and update the to-dos for your project
